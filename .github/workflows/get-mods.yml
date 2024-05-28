@@ -1,0 +1,16 @@
+name: get-mods
+run-name: Compiling mod list
+on:
+  schedule:
+    - cron: '25 0/2 * * *'
+jobs:
+  get-mods:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jiro4989/setup-nim-action@v1
+      - name: Run with nimble
+        run: nimble run
+      - name: Update repository
+        run: |
+          
