@@ -24,5 +24,5 @@ jobs:
           git config --global user.name "Github Actions"
           git config --global user.email "actions@github.com"
           git add .
-          git commit -m "Automated commit"
+          git commit -m "[automated update]"
           git push https://Pasu4:${{secrets.GITHUB_TOKEN}}:@github.com/Pasu4/animdustry-mods
