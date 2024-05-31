@@ -15,7 +15,7 @@ jobs:
           nim-version: 2.0.2
           repo-token: ${{secrets.GITHUB_TOKEN}}
       - name: Run with nimble
-        run: nimble run -d:ssl -- ${{secrets.GITHUB_TOKEN}}
+        run: nimble run -y -d:ssl -- ${{secrets.GITHUB_TOKEN}}
       - name: Update repository
         run: |
           git config --global user.name "GitHub Actions"
