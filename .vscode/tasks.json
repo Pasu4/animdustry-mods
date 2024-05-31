@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run program",
+            "type": "shell",
+            "command": "nimble run -d:ssl -- $(type .vscode/api_token.txt)",
+            "problemMatcher": [],
+        }
+    ]
+}

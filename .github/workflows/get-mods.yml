@@ -1,16 +1,25 @@
 name: get-mods
-run-name: Compiling mod list
-on:
-  schedule:
-    - cron: '25 0/2 * * *'
+run-name: Compiling the mod list
+on: 
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '25 0/2 * * *'
+  
 jobs:
   get-mods:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: 2.0.2
+          repo-token: ${{secrets.GITHUB_TOKEN}}
       - name: Run with nimble
-        run: nimble run
+        run: nimble run -d:ssl -- ${{secrets.GITHUB_TOKEN}}
       - name: Update repository
         run: |
-          
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Automated commit"
+          git push https://Pasu4:${{secrets.GITHUB_TOKEN}}

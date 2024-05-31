@@ -1,0 +1,12 @@
+{
+  "updated": "2024-05-31T04:42:24Z",
+  "mods": [],
+  "errors": [
+    {
+      "repository": "Pasu4/crux-mod",
+      "description": "Missing field 'version' in \"mod.hjson\".",
+      "details": "Missing field 'version' in \"mod.hjson\"."
+    }
+  ],
+  "warnings": []
+}

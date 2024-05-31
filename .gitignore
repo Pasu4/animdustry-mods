@@ -1,0 +1,6 @@
+# Executables
+/animdustrymods.exe
+/animdustrymods
+
+# Secrets
+/.vscode/api_token.txt
