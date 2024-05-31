@@ -1,11 +1,11 @@
 {
-  "updated": "2024-05-31T08:59:58Z",
+  "updated": "2024-05-31T09:11:14Z",
   "mods": [
     {
       "name": "Crux",
       "namespace": "crux",
       "author": "Pasu4",
-      "description": "Adds a map to the game.",
+      "description": "Adds a map to the game. Work in progress.",
       "version": "0.1.0",
       "debug": false,
       "enabled": true,
@@ -14,7 +14,7 @@
       "repoUrl": "https://github.com/Pasu4/crux-mod",
       "downloadUrl": "https://api.github.com/repos/Pasu4/crux-mod/zipball",
       "creationDate": "2024-01-31T10:53:28Z",
-      "lastUpdate": "2024-05-31T04:47:54Z"
+      "lastUpdate": "2024-05-31T09:11:02Z"
     }
   ],
   "problems": {
