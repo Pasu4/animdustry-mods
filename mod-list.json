@@ -1,12 +1,29 @@
 {
-  "updated": "2024-05-31T04:42:24Z",
-  "mods": [],
-  "errors": [
+  "updated": "2024-05-31T08:00:45Z",
+  "mods": [
     {
-      "repository": "Pasu4/crux-mod",
-      "description": "Missing field 'version' in \"mod.hjson\".",
-      "details": "Missing field 'version' in \"mod.hjson\"."
+      "name": "Crux",
+      "namespace": "crux",
+      "author": "Pasu4",
+      "description": "Adds a map to the game.",
+      "version": "0.1.0",
+      "debug": false,
+      "enabled": true,
+      "repoName": "Pasu4/crux-mod",
+      "repoOwner": "Pasu4",
+      "repoUrl": "https://github.com/Pasu4/crux-mod",
+      "downloadUrl": "https://api.github.com/repos/Pasu4/crux-mod/zipball",
+      "creationDate": "2024-01-31T10:53:28Z",
+      "lastUpdate": "2024-05-31T04:47:54Z"
     }
   ],
-  "warnings": []
+  "problems": {
+    "Pasu4/crux-mod": [
+      {
+        "description": "Mod has no tags.",
+        "details": "Add tags to \"mod.hjson\" to make it easier to find.",
+        "severity": "Warning"
+      }
+    ]
+  }
 }
