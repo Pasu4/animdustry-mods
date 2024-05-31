@@ -2,8 +2,11 @@ name: get-mods
 run-name: Compiling the mod list
 on: 
   workflow_dispatch:
-  # schedule:
-  #   - cron: '25 0/2 * * *'
+  schedule:
+    - cron: '25 0/2 * * *'
+  push:
+    branches:
+      - master
   
 jobs:
   get-mods:
