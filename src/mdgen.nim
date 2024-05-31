@@ -1,4 +1,4 @@
-import  strutils, strformat, json, tables, times, sugar, sequtils
+import strutils, strformat, json, tables, times, sugar, sequtils
 
 const
   inTimeFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
@@ -43,6 +43,7 @@ proc createMarkdown*(modsJson: JsonNode) =
       modVersion = modNode["version"].getStr().htmlEscape()
       modTags = modNode{"tags"}.getElems().map(x => x.getStr().htmlEscape()).join(", ")
       modRepo = modNode["repoName"].getStr()
+      modDeps = modNode{"dependencies"}.getElems().map(x => x.getStr().htmlEscape()).join(", ")
 
     tocStr &= &"  - [{modName}](#{modNamespace})\n"
 
@@ -63,6 +64,7 @@ proc createMarkdown*(modsJson: JsonNode) =
   <li><b>Download:</b> <a href="{modNode["downloadUrl"].getStr()}">{modNode["downloadUrl"].getStr()}</a></li>
   <li><b>Namespace:</b> {modNamespace}</li>
   <li><b>Tags:</b> {modTags}</li>
+  <li><b>Dependencies:</b> {modDeps}</li>
   <li><b>Creation Date:</b> {modNode["creationDate"].getStr().parse(inTimeFormat).format(outTimeFormat)}</li>
   <li><b>Last Updated:</b> {modNode["lastUpdate"].getStr().parse(inTimeFormat).format(outTimeFormat)}</li>
 </ul>

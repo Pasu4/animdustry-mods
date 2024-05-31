@@ -2,7 +2,7 @@
 
 # Mod List
 
-**Last updated:** Fri, 31 May 2024 09:11:14 UTC
+**Last updated:** Fri, 31 May 2024 09:24:49 UTC
 
 ## Table of Contents
 
@@ -30,6 +30,7 @@ Adds a map to the game. Work in progress.
   <li><b>Download:</b> <a href="https://api.github.com/repos/Pasu4/crux-mod/zipball">https://api.github.com/repos/Pasu4/crux-mod/zipball</a></li>
   <li><b>Namespace:</b> crux</li>
   <li><b>Tags:</b> </li>
+  <li><b>Dependencies:</b> </li>
   <li><b>Creation Date:</b> Wed, 31 Jan 2024 10:53:28 UTC</li>
   <li><b>Last Updated:</b> Fri, 31 May 2024 09:11:02 UTC</li>
 </ul>
