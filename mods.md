@@ -2,7 +2,7 @@
 
 # Mod List
 
-**Last updated:** Fri, 31 May 2024 07:56:54 UTC
+**Last updated:** Fri, 31 May 2024 08:57:13 UTC
 
 ## Table of Contents
 
@@ -40,17 +40,18 @@ Adds a map to the game.
 
 <details>
 <summary><span id="Pasu4-crux-mod"><b>Pasu4/crux-mod</b></span></summary>
-<thead>
-  <tr>
-    <th>Severity</th>
-    <th>Description</th>
-    <th>Details</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Warning</td>
-    <td>Mod has no tags.</td>
-    <td>Add tags to &quot;mod.hjson&quot; to make it easier to find.</td>
-  </tr>
-</tbody></details>
+<table>
+  <thead>
+    <tr>
+      <th>Severity</th>
+      <th>Description</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+  <td>Warning</td>
+  <td>Mod has no tags.</td>
+  <td>Add tags to &quot;mod.hjson&quot; to make it easier to find.</td>
+</tr>
+</tbody></table></details>
