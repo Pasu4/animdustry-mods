@@ -4,3 +4,6 @@
 
 # Secrets
 /.vscode/api_token.txt
+
+# GitHub Actions
+/init.sh
