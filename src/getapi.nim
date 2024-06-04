@@ -10,7 +10,9 @@ const userNameBlacklist = initTable[string, string]()
 
 const timeFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 
-proc isOk(r: Response): bool = r.status == "200 OK"
+proc isOk(r: Response): bool = r.status.startsWith("200")
+
+proc isRateLimited(r: Response): bool = r.status.startsWith("403") or r.status.startsWith("429")
 
 proc findIndex[T](s: openArray[T], predicate: (proc(x: T): bool)): int =
   for i, x in s:
@@ -28,21 +30,63 @@ proc namespaceValid(namespace: string): bool =
   # Namespace must be a valid JavaScript identifier
   return namespace.len > 0 and (namespace[0].isAlphaAscii() or namespace[0] == '_') and namespace.all(c => c.isAlphaNumeric() or c == '_')
 
+proc echoRateLimit(response: Response) =
+  let
+    rateLimit = response.headers["X-RateLimit-Limit"].parseInt()
+    rateRemaining = response.headers["X-RateLimit-Remaining"].parseInt()
+    rateReset = response.headers["X-RateLimit-Reset"].parseInt()
+    rateRetryAfter =
+      if response.headers.hasKey("retry-after"):
+        response.headers["retry-after"].parseInt()
+      else:
+        0
+    resetDuration = (rateReset.fromUnix() - getTime())
+  echo &"Rate limit: {rateRemaining}/{rateLimit} (reset in {resetDuration} / retry after {rateRetryAfter})"
+
+proc getFromApi(client: HttpClient, url: string, delay = 5000): JsonNode =
+  var response = client.get(url)
+  echo &"\nRequesting {url}"
+  echoRateLimit(response)
+
+  if response.isOk():
+    return parseJson(response.bodyStream)
+
+  if not response.isOk():
+    # If rate limited, wait and retry
+    if response.isRateLimited() and response.headers.hasKey("retry-after"):
+      let retryAfter = response.headers["retry-after"].parseInt()
+      echo &"Rate limited, waiting {retryAfter} seconds"
+      sleep(retryAfter * 1000 + 1000) # Add 1 second to be sure
+      return getFromApi(client, url)
+    # Otherwise, if rate limited, wait exponentially longer (up to 2 minutes)
+    elif response.isRateLimited() and delay < 120000:
+      echo &"Rate limited, time not specified, waiting {delay} ms"
+      sleep(delay)
+      return getFromApi(client, url, delay * 2)
+    # Otherwise, fail
+    else:
+      echo "Failed to fetch data from GitHub API"
+      echo "Status: " & response.status
+      echo "Body: " & response.body
+      quit 1
+
 proc compileModList*(): JsonNode =
   let apiToken = paramStr(1)
   var client = newHttpClient()
   client.headers["Authorization"] = "Bearer " & apiToken
 
   # TODO add pagination
-  var response = client.get("https://api.github.com/search/repositories?q=topic:animdustry-mod")
+  # var response = client.getFromApi("https://api.github.com/search/repositories?q=topic:animdustry-mod")
+  # echoRateLimit(response)
 
-  if not response.isOk():
-    echo "Failed to fetch data from GitHub API"
-    echo "Status: " & response.status
-    echo "Body: " & response.body
-    quit 1
+  # if not response.isOk():
+  #   echo "Failed to fetch data from GitHub API"
+  #   echo "Status: " & response.status
+  #   echo "Body: " & response.body
+  #   quit 1
 
-  let modListJson = parseJson(response.bodyStream)
+  # let modListJson = parseJson(response.bodyStream)
+  let modListJson = client.getFromApi("https://api.github.com/search/repositories?q=topic:animdustry-mod")
 
   # Create mod json object
   var
@@ -71,9 +115,11 @@ proc compileModList*(): JsonNode =
     echo &"Parsing {repoOwner}/{repoName}"
 
     # Find mod.json or mod.hjson in repository
-    response = client.get(&"https://api.github.com/repos/{repoOwner}/{repoName}/contents/")
+    # response = client.get(&"https://api.github.com/repos/{repoOwner}/{repoName}/contents/")
+    # echoRateLimit(response)
     let
-      repoContents = parseJson(response.bodyStream)
+      # repoContents = parseJson(response.bodyStream)
+      repoContents = client.getFromApi(&"https://api.github.com/repos/{repoOwner}/{repoName}/contents/")
       modFileIdx = repoContents.getElems()
         .findIndex(x => (x["name"].getStr() in ["mod.json", "mod.hjson"]) and x["type"].getStr() == "file")
     if modFileIdx == -1:
@@ -84,9 +130,11 @@ proc compileModList*(): JsonNode =
 
     # Download and parse content
     try:
-      response = client.get(modFile["url"].getStr())
+      # response = client.get(modFile["url"].getStr())
+      # echoRateLimit(response)
       let
-        modFileContent = base64.decode(parseJson(response.bodyStream)["content"].getStr())
+        # modFileContent = base64.decode(parseJson(response.bodyStream)["content"].getStr())
+        modFileContent = base64.decode(client.getFromApi(modFile["url"].getStr())["content"].getStr())
         modFileJson =
           if modFile["name"].getStr().endsWith(".hjson"):
             modFileContent.hjson2json().parseJson()
