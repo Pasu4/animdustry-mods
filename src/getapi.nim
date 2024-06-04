@@ -41,6 +41,7 @@ proc echoRateLimit(response: Response) =
       else:
         0
     resetDuration = (rateReset.fromUnix() - getTime())
+  echo response.status
   echo &"Rate limit: {rateRemaining}/{rateLimit} (reset in {resetDuration} / retry after {rateRetryAfter})"
 
 proc getFromApi(client: HttpClient, url: string, delay = 5000): JsonNode =
@@ -50,25 +51,24 @@ proc getFromApi(client: HttpClient, url: string, delay = 5000): JsonNode =
 
   if response.isOk():
     return parseJson(response.bodyStream)
-
-  if not response.isOk():
-    # If rate limited, wait and retry
-    if response.isRateLimited() and response.headers.hasKey("retry-after"):
-      let retryAfter = response.headers["retry-after"].parseInt()
-      echo &"Rate limited, waiting {retryAfter} seconds"
-      sleep(retryAfter * 1000 + 1000) # Add 1 second to be sure
-      return getFromApi(client, url)
-    # Otherwise, if rate limited, wait exponentially longer (up to 2 minutes)
-    elif response.isRateLimited() and delay < 120000:
-      echo &"Rate limited, time not specified, waiting {delay} ms"
-      sleep(delay)
-      return getFromApi(client, url, delay * 2)
-    # Otherwise, fail
-    else:
-      echo "Failed to fetch data from GitHub API"
-      echo "Status: " & response.status
-      echo "Body: " & response.body
-      quit 1
+  
+  # If rate limited, wait and retry
+  if response.isRateLimited() and response.headers.hasKey("retry-after"):
+    let retryAfter = response.headers["retry-after"].parseInt()
+    echo &"Rate limited, waiting {retryAfter} seconds"
+    sleep(retryAfter * 1000 + 1000) # Add 1 second to be sure
+    return getFromApi(client, url)
+  # Otherwise, if rate limited, wait exponentially longer (up to 2 minutes)
+  elif response.isRateLimited() and delay < 120000:
+    echo &"Rate limited, time not specified, waiting {delay} ms"
+    sleep(delay)
+    return getFromApi(client, url, delay * 2)
+  # Otherwise, fail
+  else:
+    echo "Failed to fetch data from GitHub API"
+    echo "Status: " & response.status
+    echo "Body: " & response.body
+    quit 1
 
 proc compileModList*(): JsonNode =
   let apiToken = paramStr(1)
