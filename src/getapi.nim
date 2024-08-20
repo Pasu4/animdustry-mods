@@ -40,9 +40,9 @@ proc echoRateLimit(response: Response) =
         response.headers["retry-after"].parseInt()
       else:
         0
-    resetDuration = (rateReset.fromUnix() - getTime())
+    resetDuration = (rateReset.fromUnix() - getTime()).toParts()
   echo response.status
-  echo &"Rate limit: {rateRemaining}/{rateLimit} (reset in {resetDuration} / retry after {rateRetryAfter})"
+  echo &"Rate limit: {rateRemaining}/{rateLimit} (reset in {resetDuration[Minutes]:2d}:{resetDuration[Seconds]:2d} / retry after {rateRetryAfter} seconds)"
 
 proc getFromApi(client: HttpClient, url: string, delay = 5000): JsonNode =
   var response = client.get(url)
@@ -60,6 +60,7 @@ proc getFromApi(client: HttpClient, url: string, delay = 5000): JsonNode =
     return getFromApi(client, url)
   # Otherwise, if rate limited, wait exponentially longer (up to 2 minutes)
   elif response.isRateLimited() and delay < 120000:
+    let dur = initDuration(milliseconds= delay)
     echo &"Rate limited, time not specified, waiting {delay} ms"
     sleep(delay)
     return getFromApi(client, url, delay * 2)
