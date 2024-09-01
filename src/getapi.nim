@@ -104,6 +104,7 @@ proc compileModList*(): JsonNode =
       repoUrl = modNode["html_url"].getStr()
       creationDate = modNode["created_at"].getStr()
       lastUpdate = modNode["updated_at"].getStr()
+      defaultBranch = modNode["default_branch"].getStr()
     
     # Enforce blacklist
     if repoName in repoNameBlacklist:
@@ -190,7 +191,8 @@ proc compileModList*(): JsonNode =
       modFileJson["repoName"] = newJString(repoFullName)
       modFileJson["repoOwner"] = newJString(repoOwner)
       modFileJson["repoUrl"] = newJString(repoUrl)
-      modFileJson["downloadUrl"] = newJString(&"https://api.github.com/repos/{repoOwner}/{repoName}/zipball")
+      # https://github.com/<user>/<repo>/archive/<branch>.zip
+      modFileJson["downloadUrl"] = newJString(&"https://github.com/{repoOwner}/{repoName}/archive/{defaultBranch}.zip")
       modFileJson["creationDate"] = newJString(creationDate)
       modFileJson["lastUpdate"] = newJString(lastUpdate)
 
