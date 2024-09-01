@@ -1,5 +1,5 @@
 {
-  "updated": "2024-09-01T08:35:03Z",
+  "updated": "2024-09-01T10:34:56Z",
   "mods": [
     {
       "name": "Crux",
@@ -15,7 +15,7 @@
       "repoName": "Pasu4/crux-mod",
       "repoOwner": "Pasu4",
       "repoUrl": "https://github.com/Pasu4/crux-mod",
-      "downloadUrl": "https://api.github.com/repos/Pasu4/crux-mod/zipball",
+      "downloadUrl": "https://github.com/Pasu4/crux-mod/archive/main.zip",
       "creationDate": "2024-01-31T10:53:28Z",
       "lastUpdate": "2024-05-31T09:37:40Z"
     }

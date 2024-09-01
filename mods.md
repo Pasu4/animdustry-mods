@@ -2,7 +2,7 @@
 
 # Mod List
 
-**Last updated:** Sun, 01 Sep 2024 08:35:03 UTC
+**Last updated:** Sun, 01 Sep 2024 10:34:56 UTC
 
 ## Table of Contents
 
@@ -20,13 +20,13 @@
 
 Adds a map to the game. Work in progress.
 
-[Download](https://api.github.com/repos/Pasu4/crux-mod/zipball) | [Repository](https://github.com/Pasu4/crux-mod)
+[Download](https://github.com/Pasu4/crux-mod/archive/main.zip) | [Repository](https://github.com/Pasu4/crux-mod)
 
 <details>
 <summary>Details</summary>
 <ul>
   <li><b>Repository:</b> <a href="https://github.com/Pasu4/crux-mod">https://github.com/Pasu4/crux-mod</a></li>
-  <li><b>Download:</b> <a href="https://api.github.com/repos/Pasu4/crux-mod/zipball">https://api.github.com/repos/Pasu4/crux-mod/zipball</a></li>
+  <li><b>Download:</b> <a href="https://github.com/Pasu4/crux-mod/archive/main.zip">https://github.com/Pasu4/crux-mod/archive/main.zip</a></li>
   <li><b>Namespace:</b> crux</li>
   <li><b>Tags:</b> map</li>
   <li><b>Dependencies:</b> </li>
