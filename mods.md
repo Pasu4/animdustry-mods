@@ -2,7 +2,7 @@
 
 # Mod List
 
-**Last updated:** Mon, 09 Sep 2024 10:38:58 UTC
+**Last updated:** Mon, 09 Sep 2024 12:53:47 UTC
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 <h3 id="crux">Crux</h3>
 
 **Author:** Pasu4<br>
-**Version:** 0.1.0
+**Version:** 0.1.1
 
 Adds a map to the game. Work in progress.
 
@@ -31,7 +31,7 @@ Adds a map to the game. Work in progress.
   <li><b>Tags:</b> map</li>
   <li><b>Dependencies:</b> </li>
   <li><b>Creation Date:</b> Wed, 31 Jan 2024 10:53:28 UTC</li>
-  <li><b>Last Updated:</b> Fri, 31 May 2024 09:37:40 UTC</li>
+  <li><b>Last Updated:</b> Mon, 09 Sep 2024 12:36:53 UTC</li>
 </ul>
 </details>
 

@@ -1,12 +1,12 @@
 {
-  "updated": "2024-09-09T10:38:58Z",
+  "updated": "2024-09-09T12:53:47Z",
   "mods": [
     {
       "name": "Crux",
       "namespace": "crux",
       "author": "Pasu4",
       "description": "Adds a map to the game. Work in progress.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "tags": [
         "map"
       ],
@@ -17,7 +17,7 @@
       "repoUrl": "https://github.com/Pasu4/crux-mod",
       "downloadUrl": "https://github.com/Pasu4/crux-mod/archive/main.zip",
       "creationDate": "2024-01-31T10:53:28Z",
-      "lastUpdate": "2024-05-31T09:37:40Z"
+      "lastUpdate": "2024-09-09T12:36:53Z"
     }
   ],
   "problems": {}
