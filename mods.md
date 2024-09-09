@@ -2,7 +2,7 @@
 
 # Mod List
 
-**Last updated:** Mon, 09 Sep 2024 12:53:47 UTC
+**Last updated:** Mon, 09 Sep 2024 14:38:09 UTC
 
 ## Table of Contents
 
@@ -31,7 +31,7 @@ Adds a map to the game. Work in progress.
   <li><b>Tags:</b> map</li>
   <li><b>Dependencies:</b> </li>
   <li><b>Creation Date:</b> Wed, 31 Jan 2024 10:53:28 UTC</li>
-  <li><b>Last Updated:</b> Mon, 09 Sep 2024 12:36:53 UTC</li>
+  <li><b>Last Updated:</b> Mon, 09 Sep 2024 13:50:06 UTC</li>
 </ul>
 </details>
 
