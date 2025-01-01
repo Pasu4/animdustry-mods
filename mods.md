@@ -2,7 +2,7 @@
 
 # Mod List
 
-**Last updated:** Tue, 31 Dec 2024 22:34:12 UTC
+**Last updated:** Wed, 01 Jan 2025 02:08:52 UTC
 
 ## Table of Contents
 
